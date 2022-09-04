@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Singleton pattern - Product list example</title>
+</head>
+
+<body>
+    <h1>Singleton pattern - Product list example</h1>
+    <p>Open console to see Logger in action.</p>
+    <script type="module">
+
+        /*********
+         * Singleton class
+         *********/
+
+        let loggerInstance;
+
+        class LoggerClass {
+            constructor() {
+                if (loggerInstance) {
+                    throw new Error("You can only create one instance!");
+                }
+                loggerInstance = this;
+            }
+            log(level, message) {
+                const colors = {
+                    info: "blue",
+                    debug: "green",
+                    trace: "black",
+                    warn: "orange",
+                    error: "red",
+                    fatal: "darkred"
+                };
+
+                const output = `${new Date().toISOString().replace('T', ' ').split('.')[0]} | ${level}: ${message}`
+                console.log(`%c${output}`, `color:${colors[level]}`);
+            }
+            info(message) {
+                this.log("info", message);
+            }
+            debug(message) {
+                this.log("debug", message);
+            }
+            trace(message) {
+                this.log("trace", message);
+            }
+            warn(message) {
+                this.log("warn", message);
+            }
+            error(message) {
+                this.log("error", message);
+            }
+            fatal(message) {
+                this.log("fatal", message);
+            }
+        }
+
+        const loggerClass = new LoggerClass();
+        loggerClass.info('Some info here.');
+        loggerClass.debug('Something is happenning FYI.');
+        loggerClass.warn('Oh! This is deprecated.');
+        loggerClass.error('Oops! Something is wrong.');
+        loggerClass.fatal('Oh no! It is crashing.');
+
+        /* can only be instantiated once */
+        try {
+            const loggerClass2 = new LoggerClass();
+        } catch (error) {
+            loggerClass.error(error);
+        }
+
+        /*********
+         * Singleton object
+         *********/
+
+        const loggerObj = {
+            colors: {
+                info: "blue",
+                debug: "green",
+                trace: "black",
+                warn: "orange",
+                error: "red",
+                fatal: "darkred"
+            },
+            log: (level, message) => {
+                const output = `${new Date().toISOString().replace('T', ' ').split('.')[0]} | ${level}: ${message}`
+                console.log(`%c${output}`, `color:${loggerObj.colors[level]}`);
+            },
+            info: (message) => {
+                loggerObj.log("info", message);
+            },
+            debug: (message) => {
+                loggerObj.log("debug", message);
+            },
+            trace: (message) => {
+                loggerObj.log("trace", message);
+            },
+            warn: (message) => {
+                loggerObj.log("warn", message);
+            },
+            error: (message) => {
+                loggerObj.log("error", message);
+            },
+            fatal: (message) => {
+                loggerObj.log("fatal", message);
+            }
+        };
+
+        Object.freeze(loggerObj);
+
+        loggerObj.info('Some info here.');
+        loggerObj.debug('Something is happenning FYI.');
+        loggerObj.warn('Oh! This is deprecated.');
+        loggerObj.error('Oops! Something is wrong.');
+        loggerObj.fatal('Oh no! It is crashing.');
+
+        // cannot be modified
+        try {
+            loggerObj["test"] = "modify";
+        } catch (error) {
+            loggerObj.error(error);
+        }
+    </script>
+</body>
+
+</html>

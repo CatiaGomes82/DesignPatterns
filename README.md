@@ -26,7 +26,7 @@
 - [x] [Abstract Factory](./Creational/AbstractFactory/README.md)
 - [ ] Builder
 - [ ] Prototype //
-- [ ] Singleton //
+- [x] [Singleton](./Creational/Singleton/README.md)
 
 ### Structural
 - [ ] Adapter
@@ -80,7 +80,7 @@
 * [Design patterns for humans](https://github.com/kamranahmedse/design-patterns-for-humans)
 * [Essential js design patterns](https://github.com/addyosmani/essential-js-design-patterns)
 * [JS ES6 design patterns: Factory](https://dev.to/sanderdebr/js-es6-design-patterns-factory-3a3g)
-
+* [Singleton design pattern: introduction](https://www.geeksforgeeks.org/singleton-design-pattern-introduction/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
