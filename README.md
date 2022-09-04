@@ -21,8 +21,9 @@
 
 ### Creational
 
-- [ ] Simple Factory
-- [x] [Factory Method](./Creational/FactoryMethod/README.md)
+- [x] [Factory](./Creational/Factory/README.md)
+- [ ] Factory Method
+- [x] [Abstract Factory](./Creational/AbstractFactory/README.md)
 - [ ] Abstract Factory
 - [ ] Builder
 - [ ] Prototype //
