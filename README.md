@@ -22,7 +22,7 @@
 ### Creational
 
 - [ ] Simple Factory
-- [ ] Factory Method //
+- [x] [Factory Method](./Creational/FactoryMethod/README.md)
 - [ ] Abstract Factory
 - [ ] Builder
 - [ ] Prototype //

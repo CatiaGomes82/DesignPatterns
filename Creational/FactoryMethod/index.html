@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Factory method pattern - Product list example</title>
+</head>
+
+<body>
+
+    <h1>Factory method pattern - Product list example</h1>
+    <ul id="products"></ul>
+
+    <script type="application/javascript">
+        /* product factory */
+        const createProduct = ({ id = crypto.randomUUID(), name, price }) => ({
+            id,
+            name,
+            price,
+            getProduct() {
+                return `
+                Id: ${this.id} </br>
+                Name: ${this.name} </br>
+                Price: ${this.price}
+                `;
+            }
+        });
+
+        /* create new product instance */
+        const product1 = createProduct({
+            name: "Phone",
+            price: "$870"
+        });
+
+        /* create new product instance */
+        const product2 = createProduct({
+            name: "T-shirt",
+            price: "$12"
+        });
+
+        console.log(product1);
+        console.log(product2);
+
+        const getProductHtml = (product) => {
+            const li = document.createElement("li");
+            li.innerHTML = product.getProduct();
+            return li;
+        };
+
+        document.getElementById("products").append(getProductHtml(product1));
+        document.getElementById("products").append(getProductHtml(product2));
+    </script>
+</body>
+
+</html>
