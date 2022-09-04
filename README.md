@@ -43,7 +43,7 @@
 - [ ] Iterator
 - [ ] Mediator
 - [ ] Memento
-- [Observer](./Behavioral/Observer/README.md)
+- [x] [Observer](./Behavioral/Observer/README.md)
 - [ ] Visitor
 - [ ] Strategy
 - [ ] State
