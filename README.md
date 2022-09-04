@@ -24,7 +24,6 @@
 - [x] [Factory](./Creational/Factory/README.md)
 - [x] [Factory Method](./Creational/FactoryMethod/README.md)
 - [x] [Abstract Factory](./Creational/AbstractFactory/README.md)
-- [ ] Abstract Factory
 - [ ] Builder
 - [ ] Prototype //
 - [ ] Singleton //
