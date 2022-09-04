@@ -6,17 +6,16 @@
 </head>
 
 <body>
-
     <h1>Abstract Factory pattern - Product list example</h1>
     <ul id="products"></ul>
 
     <script type="application/javascript">
-        const createTechProduct = ({ name, model }) => ({
+        const techProduct = ({ name, model }) => ({
             name,
             model
         });
 
-        const createClothesProduct = ({ name, size }) => ({
+        const clothesProduct = ({ name, size }) => ({
             name,
             size,
         });
@@ -36,8 +35,8 @@
         });
 
         const products = createProduct();
-        products.registerProducts('clothes', createClothesProduct);
-        products.registerProducts('tech', createTechProduct);
+        products.registerProducts('clothes', clothesProduct);
+        products.registerProducts('tech', techProduct);
 
         const tshirt = products.createProduct('clothes', {
             name: 'Happy Life',
@@ -49,8 +48,8 @@
             model: '13 Pro',
         });
 
-        console.log(phone)
-        console.log(tshirt)
+        console.log(phone);
+        console.log(tshirt);
 
         const getProductHtml = (product) => {
             const li = document.createElement("li");

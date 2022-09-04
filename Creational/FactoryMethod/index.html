@@ -6,52 +6,51 @@
 </head>
 
 <body>
-
     <h1>Factory method pattern - Product list example</h1>
     <ul id="products"></ul>
 
     <script type="application/javascript">
-        class Tech {
-            constructor({ name, model }) {
-                this.name = name || '';
-                this.model = model || '';
-            }
-        }
 
-        class Clothes {
-            constructor({ name, size }) {
-                this.name = name || '';
-                this.size = size || '';
-            }
-        }
+        /* data model for tech product */
+        const techProduct = ({ name, model }) => ({
+            name,
+            model
+        });
 
-        class Product {
+        /* data model for clothes product */
+        const clothesProduct = ({ name, size }) => ({
+            name,
+            size,
+        });
+
+        const createProduct = () => ({
             createProduct(data) {
-                const product = this.create(data);
-                return product;
+                return this.create(data);
             }
-        }
+        });
 
-        class TechFactory extends Product {
+        const techProductFactory = () => ({
+            ...createProduct(),
             create(data) {
-                return new Tech(data);
+                return techProduct(data);
             }
-        }
+        });
 
-        class ClothesFactory extends Product {
+        const clothesProductFactory = () => ({
+            ...createProduct(),
             create(data) {
-                return new Clothes(data);
+                return clothesProduct(data);
             }
-        }
+        });
 
-        const techFactory = new TechFactory();
+        const techFactory = techProductFactory();
         const product1 = techFactory.createProduct({
             name: 'iPhone',
             model: '13 Pro',
         });
         console.log(product1);
 
-        const clothesFactory = new ClothesFactory();
+        const clothesFactory = clothesProductFactory();
         const product2 = clothesFactory.createProduct({
             name: 'Happy Life',
             size: 'S',
