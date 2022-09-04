@@ -22,7 +22,7 @@
 ### Creational
 
 - [x] [Factory](./Creational/Factory/README.md)
-- [ ] Factory Method
+- [x] [Factory Method](./Creational/FactoryMethod/README.md)
 - [x] [Abstract Factory](./Creational/AbstractFactory/README.md)
 - [ ] Abstract Factory
 - [ ] Builder
@@ -80,6 +80,8 @@
 * [Patterns.dev](https://www.patterns.dev/)
 * [Design patterns for humans](https://github.com/kamranahmedse/design-patterns-for-humans)
 * [Essential js design patterns](https://github.com/addyosmani/essential-js-design-patterns)
+* [JS ES6 design patterns: Factory](https://dev.to/sanderdebr/js-es6-design-patterns-factory-3a3g)
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555

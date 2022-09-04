@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Factory method pattern - Product list example</title>
+</head>
+
+<body>
+
+    <h1>Factory method pattern - Product list example</h1>
+    <ul id="products"></ul>
+
+    <script type="application/javascript">
+        class Tech {
+            constructor({ name, model }) {
+                this.name = name || '';
+                this.model = model || '';
+            }
+        }
+
+        class Clothes {
+            constructor({ name, size }) {
+                this.name = name || '';
+                this.size = size || '';
+            }
+        }
+
+        class Product {
+            createProduct(data) {
+                const product = this.create(data);
+                return product;
+            }
+        }
+
+        class TechFactory extends Product {
+            create(data) {
+                return new Tech(data);
+            }
+        }
+
+        class ClothesFactory extends Product {
+            create(data) {
+                return new Clothes(data);
+            }
+        }
+
+        const techFactory = new TechFactory();
+        const product1 = techFactory.createProduct({
+            name: 'iPhone',
+            model: '13 Pro',
+        });
+        console.log(product1);
+
+        const clothesFactory = new ClothesFactory();
+        const product2 = clothesFactory.createProduct({
+            name: 'Happy Life',
+            size: 'S',
+        })
+        console.log(product2);
+
+        const getProductHtml = (product) => {
+            const li = document.createElement("li");
+            li.innerHTML = '';
+            for (const [key, value] of Object.entries(product)) {
+                li.innerHTML += `${key}: ${value} </br>`;
+            }
+            return li;
+        };
+
+        document.getElementById("products").append(getProductHtml(product1));
+        document.getElementById("products").append(getProductHtml(product2));
+    </script>
+</body>
+
+</html>
