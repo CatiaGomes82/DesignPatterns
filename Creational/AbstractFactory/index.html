@@ -11,39 +11,33 @@
     <ul id="products"></ul>
 
     <script type="application/javascript">
-        class Tech {
-            constructor({ name, model }) {
-                this.name = name || '';
-                this.model = model || '';
-            }
-        }
+        const createTechProduct = ({ name, model }) => ({
+            name,
+            model
+        });
 
-        class Clothes {
-            constructor({ name, size }) {
-                this.name = name || '';
-                this.size = size || '';
-            }
-        }
+        const createClothesProduct = ({ name, size }) => ({
+            name,
+            size,
+        });
 
-        class Product {
-            constructor() {
-                this.types = {};
-            }
+        const createProduct = () => ({
+            types: {},
             registerProducts(productType, Product) {
                 this.types[productType] = Product;
 
                 return Product;
-            }
+            },
             createProduct(type, customizations) {
                 const Product = this.types[type];
 
-                return Product ? new Product(customizations) : null;
+                return Product ? Product(customizations) : null;
             }
-        }
+        });
 
-        const products = new Product();
-        products.registerProducts('clothes', Clothes);
-        products.registerProducts('tech', Tech);
+        const products = createProduct();
+        products.registerProducts('clothes', createClothesProduct);
+        products.registerProducts('tech', createTechProduct);
 
         const tshirt = products.createProduct('clothes', {
             name: 'Happy Life',
