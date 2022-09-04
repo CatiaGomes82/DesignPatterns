@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observer</title>
+    <style>
+        body {
+            background-color: #d6dbe0;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .post {
+            background: #ffffff;
+            margin-block-start: 20px;
+            padding-inline: 15px;
+            padding-block: 10px;
+            position: relative;
+            border-radius: 7px;
+        }
+
+        .post__author {
+            display: flex;
+            align-items: center;
+        }
+
+        .post__photo {
+            border-radius: 50%;
+            border: 1px solid #dadada;
+            margin-inline-end: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Observer pattern - Social Media example</h1>
+    <div id="unsubscribed">
+        <button type="button" onclick="subscribeBtn()">Subscribe to FakeUser's updates</button>
+    </div>
+
+    <div id="subscribed" class="hide">
+        <p>You are now subscribed to FakeUser.</p>
+        <button type="button" onclick="unsubscribeBtn()">Unsubscribe to FakeUser's updates</button>
+    </div>
+
+    <div id="feed-container" class="hide">
+        <h2>Your Feed</h2>
+        <div id="feed"></div>
+    </div>
+
+    <script type="application/javascript">
+        class Observable {
+            constructor() {
+                this.observers = [];
+            }
+
+            subscribe(func) {
+                this.observers.push(func);
+            }
+
+            unsubscribe(func) {
+                this.observers = this.observers.filter(observer => observer !== func);
+            }
+
+            notify(data) {
+                this.observers.forEach(observer => observer(data));
+            }
+        }
+
+        const newPostbyFakeUser = (message) => {
+            const post = document.createElement("div");
+            post.classList.add("post");
+
+            post.innerHTML = `
+            <p class="post__author">
+                <img class="post__photo" src="https://i.pravatar.cc/30?img=15" />
+                FakeUser
+            </p>
+            <p>${message}</p>
+            `;
+
+            document.getElementById("feed").prepend(post);
+        };
+
+        /* actions user is notified to go here */
+        const fakeUserActions = () => {
+            const messages = [
+                "There is no right or wrong - as long as it makes you happy and doesn't hurt anyone.",
+                "Making all those little fluffies that live in the clouds.",
+                "All kinds of happy little splashes.",
+                "We touch the canvas, the canvas takes what it wants.",
+                "Automatically, all of these beautiful, beautiful things will happen.",
+                "Use what you see, don't plan it.",
+                "All you have to learn here is how to have fun."
+            ];
+
+            // fake user actions trigger a notify
+            setInterval(() => {
+                const randomIndex = Math.floor(Math.random() * messages.length);
+                const message = messages[randomIndex];
+
+                console.log('FakeUser new post: ' + message);
+                userFeed.notify(message);
+            }, 4000);
+        };
+
+        const userFeed = new Observable();
+
+        // fakeuser's posts
+        fakeUserActions();
+
+        const subscribeBtn = () => {
+            document.getElementById("subscribed").classList.remove("hide");
+            document.getElementById("feed-container").classList.remove("hide");
+            document.getElementById("unsubscribed").classList.add("hide");
+
+            // subscribe to fakeuser
+            userFeed.subscribe(newPostbyFakeUser);
+            userFeed.notify('You are now subscribed to my updates.');
+        };
+
+        const unsubscribeBtn = () => {
+            document.getElementById("unsubscribed").classList.remove("hide");
+            document.getElementById("subscribed").classList.add("hide");
+
+            userFeed.notify('You are now unsubscribed.');
+
+            // unsubscribe from fakeuser
+            userFeed.unsubscribe(newPostbyFakeUser);
+        };
+    </script>
+</body>
+
+</html>
