@@ -35,7 +35,7 @@
 - [ ] Decorator
 - [ ] Facade
 - [ ] Flyweight
-- [ ] Proxy //
+- [x] [Proxy](./Structural/Proxy/README.md)
 
 ### Behavioral
 - [ ] Chain of Responsibility

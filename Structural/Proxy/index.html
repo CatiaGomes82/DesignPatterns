@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Proxy pattern - Money transaction example</title>
+</head>
+
+<body>
+    <h1>Proxy pattern - Money transaction example</h1>
+    <div>
+        <button type="button" onclick="check()">Check bank account</button>
+        <button type="button" onclick="withdraw()">Withdraw £1000</button>
+        <button type="button" onclick="deposit()">Deposit £20</button>
+        <div id="display"></div>
+    </div>
+    <script type="application/javascript">
+        // bank account data
+        const bankAccount = {
+            name: "John Doe",
+            debitAccount: 870,
+            savingsAccount: 1000
+        };
+
+        // proxy to validate data
+        const bankAccountProxy = new Proxy(bankAccount, {
+            get: (obj, prop) => {
+                console.log('Doing some logic to check if it\'s John Doe.');
+                console.log('Checking bank balance');
+            
+                return obj[prop];
+            },
+            set: (obj, prop, value) => {
+                console.log('Doing some logic to check if it\'s John Doe.');
+                console.log('Updating bank balance');
+             
+                // do some validation here
+                if (prop === "debitAccount" && value < 0) {
+                    throw Error("Cannot go into overdraft.");
+                }
+
+                // update the object the following way
+                // obj[prop] = value;
+                // return true;
+
+                // or even better use the Reflect API
+                return Reflect.set(obj, prop, value);
+            }
+        });
+
+        const updateBalance = (newDebitAccount) => {
+            try {
+                bankAccountProxy.debitAccount = newDebitAccount;
+
+                return `New balance: ${newDebitAccount}`;
+            } catch (error) {
+                return error;
+            }
+        };
+
+        const check = () => {
+            const debitAccount = bankAccountProxy.debitAccount;
+            const savingsAccount = bankAccountProxy.savingsAccount;
+
+            document.getElementById("display").innerHTML = `
+            <p>Deposit Account: ${debitAccount}</p>
+            <p>Savings Account: ${savingsAccount}</p>
+            `;
+
+            document.getElementById("display").classList.remove("hide");
+        };
+
+        const withdraw = () => {
+            const totalDebitAccount = bankAccountProxy.debitAccount;
+            const outcome = updateBalance(totalDebitAccount - 1000);
+            document.getElementById("display").innerHTML = outcome;
+        };
+
+        const deposit = () => {
+            const totalDebitAccount = bankAccountProxy.debitAccount;
+            const outcome = updateBalance(totalDebitAccount + 20);
+            document.getElementById("display").innerHTML = outcome;
+        };
+    </script>
+</body>
+
+</html>
