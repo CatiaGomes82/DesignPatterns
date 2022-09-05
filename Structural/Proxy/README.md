@@ -12,7 +12,7 @@
 > * set: Gets invoked when trying to modify a property
 
 ### Example
-[View money transaction example example](./index.html)
+[View money transaction example](./index.html)
 
 ### Pros
 > Proxies are a powerful way to add control over the behavior of an object. A proxy can have various use-cases: it can help with validation, formatting, notifications, or debugging.
